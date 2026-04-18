@@ -65,13 +65,18 @@ export const Card: React.FC = () => {
   const transform = useMotionTemplate`rotateX(${rotateX}deg) rotateY(calc(${rotateY}deg + ${flipY}deg))`;
 
   return (
-    <div className="relative perspective-[1500px] w-[66vw] max-w-[500px] min-w-[280px] aspect-[1.586/1] group cursor-pointer">
-      {/* Elegant Ambient Glow Shadow */}
-      <div className="absolute -inset-1.5 sm:-inset-4 bg-gradient-to-br from-pink-200/70 via-fuchsia-100/50 to-purple-200/70 rounded-[2rem] blur-xl sm:blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+    <div className="relative w-[66vw] max-w-[500px] min-w-[280px] aspect-[1.586/1] group cursor-pointer z-10">
+      {/* Elegant Ambient Glow Shadow - Isolated fully to fix Safari plane intersection */}
+      <div 
+        className="absolute -inset-1.5 sm:-inset-4 bg-gradient-to-br from-pink-200/70 via-fuchsia-100/50 to-purple-200/70 rounded-[2rem] blur-xl sm:blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
+        style={{ transform: 'translateZ(0)' }} 
+      />
       
-      <motion.div
-        className="w-full h-full relative preserve-3d touch-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl"
-        style={{ transform }}
+      {/* 3D Perspective Context */}
+      <div className="absolute inset-0 perspective-[1500px]">
+        <motion.div
+          className="w-full h-full relative preserve-3d touch-none rounded-2xl"
+          style={{ transform }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onMouseEnter={handleMouseEnter}
@@ -81,16 +86,20 @@ export const Card: React.FC = () => {
         onClick={() => setIsFlipped(!isFlipped)}
       >
         {/* Front Face */}
-        <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden ring-1 ring-slate-900/5 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] bg-white/50">
-          <div className="absolute inset-0 z-0">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <ShaderPlane tiltRef={tiltRef} color1="#ffffff" color2="#fce7f3" />
-            </Canvas>
-          </div>
-          
-          {/* Front Content */}
-          <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col justify-between text-slate-800">
-            <div className="flex justify-between items-start">
+        <div 
+          className="absolute inset-0 backface-hidden"
+          style={{ WebkitBackfaceVisibility: 'hidden', WebkitTransform: 'translateZ(1px)', transform: 'translateZ(1px)' }}
+        >
+          <div className="absolute inset-0 rounded-2xl overflow-hidden ring-1 ring-slate-900/5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.4)] bg-white/50">
+            <div className="absolute inset-0 z-0">
+              <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+                <ShaderPlane tiltRef={tiltRef} color1="#ffffff" color2="#fce7f3" />
+              </Canvas>
+            </div>
+            
+            {/* Front Content */}
+            <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col justify-between text-slate-800">
+              <div className="flex justify-between items-start">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <User className="w-5 h-5 sm:w-8 sm:h-8 text-pink-500" />
                 <span className="font-semibold tracking-wider text-sm sm:text-lg">PROFILE</span>
@@ -137,18 +146,23 @@ export const Card: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Back Face */}
-        <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden ring-1 ring-slate-900/5 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] bg-white/50 rotate-y-180">
+      {/* Back Face */}
+      <div 
+        className="absolute inset-0 backface-hidden"
+        style={{ WebkitBackfaceVisibility: 'hidden', WebkitTransform: 'rotateY(180deg) translateZ(1px)', transform: 'rotateY(180deg) translateZ(1px)' }}
+      >
+        <div className="absolute inset-0 rounded-2xl overflow-hidden ring-1 ring-slate-900/5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.4)] bg-white/50">
           <div className="absolute inset-0 z-0">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <ShaderPlane tiltRef={tiltRef} color1="#fce7f3" color2="#fbcfe8" />
-            </Canvas>
-          </div>
-          
-          {/* Back Content */}
-          <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col text-slate-800">
-            <div className="flex-1 flex flex-col justify-center space-y-3 sm:space-y-6">
+              <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+                <ShaderPlane tiltRef={tiltRef} color1="#fce7f3" color2="#fbcfe8" />
+              </Canvas>
+            </div>
+            
+            {/* Back Content */}
+            <div className="absolute inset-0 z-10 p-4 sm:p-6 flex flex-col text-slate-800">
+              <div className="flex-1 flex flex-col justify-center space-y-3 sm:space-y-6">
               <div>
                 <h3 className="text-[8px] sm:text-xs text-slate-500 uppercase tracking-widest mb-1 sm:mb-2 border-b border-slate-300/50 pb-1">About Me</h3>
                 <p className="text-[9px] sm:text-sm leading-snug sm:leading-relaxed text-slate-700 line-clamp-3 sm:line-clamp-none">
@@ -184,7 +198,9 @@ export const Card: React.FC = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

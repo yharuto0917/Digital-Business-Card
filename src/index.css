@@ -7,15 +7,18 @@
 
 @layer utilities {
   .preserve-3d {
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }
   .backface-hidden {
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
   .perspective-\[1500px\] {
+    -webkit-perspective: 1500px;
     perspective: 1500px;
   }
 }
