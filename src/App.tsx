@@ -20,7 +20,7 @@ function GitHubMarkIcon() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#fafafa] flex items-center justify-center p-4">
+    <div className="min-h-dvh bg-[#fafafa] flex items-center justify-center p-4">
       <Card />
       
       {/* Footer Links */}
