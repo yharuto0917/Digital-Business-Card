@@ -65,7 +65,7 @@ export const Card: React.FC = () => {
   const transform = useMotionTemplate`rotateX(${rotateX}deg) rotateY(calc(${rotateY}deg + ${flipY}deg))`;
 
   return (
-    <div className="relative w-[66vw] max-w-[500px] min-w-[280px] aspect-[1.586/1] group cursor-pointer z-10">
+    <div className="relative w-[290px] max-w-[calc(100vw-1.5rem)] min-[436px]:w-[66vw] min-[436px]:max-w-[500px] aspect-[1.586/1] group cursor-pointer z-10">
       {/* Elegant Ambient Glow Shadow - Isolated fully to fix Safari plane intersection */}
       <div 
         className="absolute -inset-1.5 sm:-inset-4 bg-gradient-to-br from-pink-200/70 via-fuchsia-100/50 to-purple-200/70 rounded-[2rem] blur-xl sm:blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
@@ -172,9 +172,9 @@ export const Card: React.FC = () => {
               
               <div>
                 <h3 className="text-[8px] sm:text-xs text-slate-500 uppercase tracking-widest mb-1 sm:mb-2 border-b border-slate-300/50 pb-1">Skills</h3>
-                <div className="flex flex-wrap gap-1 sm:gap-2">
+                <div className="flex flex-nowrap gap-0.5 sm:gap-2">
                   {['Python', 'TypeScript', 'PyTorch', 'Pydantic AI', 'Next.js'].map(skill => (
-                    <span key={skill} className="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-white/40 rounded text-[8px] sm:text-xs font-medium border border-pink-200/50 text-slate-700">
+                    <span key={skill} className="whitespace-nowrap px-1 py-0.5 sm:px-2 sm:py-1 bg-white/40 rounded text-[7px] leading-none sm:text-xs font-medium border border-pink-200/50 text-slate-700">
                       {skill}
                     </span>
                   ))}

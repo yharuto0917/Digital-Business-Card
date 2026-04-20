@@ -1,13 +1,13 @@
 <claude-mem-context>
 # Memory Context
 
-# [Degital-Card-App] recent context, 2026-04-20 10:51pm GMT+9
+# [Degital-Card-App] recent context, 2026-04-20 10:56pm GMT+9
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 8 obs (2,910t read) | 57,535t work | 95% savings
+Stats: 9 obs (3,152t read) | 58,309t work | 95% savings
 
 ### Apr 20, 2026
 57 10:27p 🔵 Digital-Card-App Tech Stack Identified for README
@@ -18,6 +18,7 @@ Stats: 8 obs (2,910t read) | 57,535t work | 95% savings
 62 " 🔵 Pre-existing TypeScript errors in Card.tsx and ShaderPlane.tsx
 63 " 🔵 Corrected Degital-Card-App dependency versions from package.json
 64 10:50p 🔄 Footer links layout changed from flex-wrap row to flex-col
+66 10:52p 🔄 App root container changed from min-h-screen to min-h-dvh
 
 Access 58k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
