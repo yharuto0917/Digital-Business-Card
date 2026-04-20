@@ -6,3 +6,14 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Agent
+.claude
+.playwright-mcp
+
+# Cloudflare
+.wrangler
+
+# npm
+.npm
+temp-npm-cache
